@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>나에게 어울리는 헤어는 따로 있습니다 | 민경이즘</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:      #7B5EA7;
+      --purple-light:#A78BCC;
+      --purple-bg:   #EDE8F7;
+      --purple-pale: #F5F1FB;
+      --beige:       #FAF7F4;
+      --beige-dark:  #F0EAE2;
+      --text:        #2D2D2D;
+      --text-sub:    #666;
+      --white:       #FFFFFF;
+      --shadow:      0 4px 20px rgba(123,94,167,.12);
+      --radius:      18px;
+      --fem:  #C97B93;
+      --fem-bg: #FBEFF2;
+      --mod:  #3D3D46;
+      --mod-bg: #ECECEE;
+      --nat:  #8A9A5B;
+      --nat-bg: #F0F3E8;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--beige);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    /* ── HERO ─────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(145deg, #ede8f7 0%, #f5f0fb 50%, #faf7f4 100%);
+      padding: 80px 24px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,94,167,.08) 0%, transparent 70%);
+      top: -100px; left: 50%; transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--purple);
+      color: #fff;
+      font-size: 12px; font-weight: 600; letter-spacing: .08em;
+      padding: 5px 16px; border-radius: 100px; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5.5vw, 44px);
+      font-weight: 900; line-height: 1.35; color: var(--text); margin-bottom: 12px;
+    }
+    .hero h1 em { color: var(--purple); font-style: normal; }
+    .hero .sub { font-size: 15px; color: var(--text-sub); margin-bottom: 32px; }
+
+    .author-chip {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--white); border-radius: 100px;
+      padding: 10px 20px; box-shadow: var(--shadow);
+      font-size: 14px; font-weight: 500;
+    }
+    .author-chip .dot {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple-light), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 15px; font-weight: 700; flex-shrink: 0;
+    }
+
+    /* ── LAYOUT ───────────────────────────────────── */
+    .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 56px 0 0; }
+    section:last-of-type { padding-bottom: 80px; }
+
+    .sec-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; letter-spacing: .12em;
+      color: var(--purple); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .sec-label::before {
+      content: ''; display: block; width: 18px; height: 2px;
+      background: var(--purple); border-radius: 2px;
+    }
+    .sec-title { font-size: clamp(20px, 3.5vw, 27px); font-weight: 800; line-height: 1.4; margin-bottom: 6px; }
+    .sec-desc  { font-size: 14px; color: var(--text-sub); margin-bottom: 32px; }
+
+    .card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 28px; box-shadow: var(--shadow); margin-bottom: 16px;
+    }
+
+    /* ── 오프닝: 비포/애프터 ──────────────────────── */
+    .compare-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    @media (max-width: 640px) {
+      .compare-wrap, .mood-grid, .sub-grid, .easy-grid, .game-grid, .cta-links { grid-template-columns: 1fr !important; }
+      .chain-row { flex-direction: column !important; }
+    }
+    .photo-slot {
+      background: var(--purple-bg); border-radius: var(--radius);
+      aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px; box-shadow: var(--shadow);
+      color: var(--purple); font-weight: 700; font-size: 13px; text-align: center; padding: 12px;
+    }
+    .photo-slot .num { font-size: 26px; font-weight: 900; }
+    .vote-hint { text-align: center; font-size: 13px; color: var(--text-sub); margin-top: 10px; }
+
+    /* ── 이미지 체인 ───────────────────────────────── */
+    .chain-row { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+    .chain-node {
+      background: var(--white); border-radius: 100px; padding: 10px 16px;
+      font-size: 13px; font-weight: 700; box-shadow: var(--shadow); color: var(--purple);
+    }
+    .chain-arrow { color: var(--purple-light); font-size: 16px; font-weight: 900; }
+
+    /* ── 민경이즘 공식 (시그니처) ──────────────────── */
+    .formula-mark {
+      background: var(--purple); border-radius: var(--radius);
+      padding: 40px 28px; color: #fff; text-align: center; margin-bottom: 16px;
+      position: relative; overflow: hidden;
+    }
+    .formula-mark::before {
+      content: '민경이즘 공식';
+      position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+      font-size: 11px; font-weight: 800; letter-spacing: .2em; opacity: .6;
+    }
+    .formula-mark .eq1 { font-size: clamp(17px, 3.5vw, 23px); font-weight: 900; margin: 22px 0 18px; line-height: 1.7; }
+    .formula-mark .eq1 span { opacity: .7; font-size: .8em; }
+    .formula-mark .eq2 { font-size: 14px; font-weight: 500; line-height: 1.8; opacity: .92; border-top: 1px solid rgba(255,255,255,.25); padding-top: 16px; }
+    .formula-mark .eq2 b { font-weight: 800; }
+
+    /* ── 쉬운말 3무드 카드 ────────────────────────── */
+    .easy-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 12px; }
+    .easy-card { border-radius: var(--radius); padding: 24px 18px; text-align: center; box-shadow: var(--shadow); }
+    .easy-card.fem { background: var(--fem-bg); }
+    .easy-card.mod { background: var(--mod-bg); }
+    .easy-card.nat { background: var(--nat-bg); }
+    .easy-card .emoji { font-size: 28px; margin-bottom: 10px; }
+    .easy-card h4 { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+    .easy-card .term { font-size: 12px; color: var(--text-sub); font-weight: 600; }
+
+    /* ── 사진 맞히기 게임 ─────────────────────────── */
+    .game-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    @media (max-width: 780px) { .game-grid { grid-template-columns: repeat(3, 1fr); } }
+    .game-card {
+      background: var(--white); border-radius: 14px; padding: 10px; box-shadow: var(--shadow);
+      text-align: center; cursor: pointer;
+    }
+    .game-card .thumb {
+      background: var(--purple-pale); border-radius: 10px; aspect-ratio: 3/4;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 900; color: var(--purple-light); margin-bottom: 8px;
+    }
+    .game-card .label { font-size: 12px; font-weight: 700; color: var(--text-sub); }
+    .game-card .answer {
+      display: none; font-size: 11.5px; font-weight: 800; margin-top: 6px;
+      padding: 4px 8px; border-radius: 100px;
+    }
+    .game-card.revealed .answer { display: inline-block; }
+    .game-card.revealed .thumb { color: var(--purple); }
+    .game-card .answer.fem { background: var(--fem-bg); color: var(--fem); }
+    .game-card .answer.mod { background: var(--mod-bg); color: var(--mod); }
+    .game-card .answer.nat { background: var(--nat-bg); color: var(--nat); }
+    .game-hint { text-align: center; font-size: 12.5px; color: var(--text-sub); margin-top: 12px; }
+
+    /* ── 계열별 디자인 공식 ───────────────────────── */
+    .formula-box { border-radius: var(--radius); padding: 26px 24px; color: #fff; margin-bottom: 16px; }
+    .formula-box.fem { background: var(--fem); }
+    .formula-box.mod { background: var(--mod); }
+    .formula-box.nat { background: var(--nat); }
+    .formula-box .f-label { font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; opacity: .8; margin-bottom: 14px; }
+    .formula-box ol { padding-left: 20px; font-size: 13.5px; line-height: 2; }
+    .formula-box .salon-line { margin-top: 14px; font-size: 13px; font-weight: 700; background: rgba(255,255,255,.15); padding: 10px 14px; border-radius: 10px; }
+
+    .fail-block { background: var(--white); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+    .summary-quote { background: var(--purple-bg); border-left: 4px solid var(--purple); border-radius: 0 12px 12px 0; padding: 14px 18px; font-size: 14px; font-weight: 700; color: var(--purple); }
+
+    .closing { background: linear-gradient(145deg, #ede8f7, #faf7f4); border-radius: var(--radius); padding: 32px 26px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow); }
+    .closing p { font-size: 14.5px; font-weight: 500; line-height: 1.9; color: var(--text); }
+
+    .cta-links { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .cta-btn {
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;
+      background: var(--white); border-radius: 14px; padding: 16px 12px;
+      text-decoration: none; color: var(--text); box-shadow: var(--shadow);
+      font-size: 12px; font-weight: 600; transition: transform .15s, box-shadow .15s;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(123,94,167,.18); }
+    .cta-btn .icon-box {
+      width: 40px; height: 40px; border-radius: 12px; background: var(--purple-bg); color: var(--purple);
+      display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;
+    }
+
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--beige-dark), transparent); margin: 40px 0 0; }
+
+    footer { text-align: center; padding: 32px 24px; font-size: 12px; color: #aaa; background: var(--white); margin-top: 56px; }
+    footer strong { color: var(--purple); }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="badge">FREE LECTURE · 60MIN</div>
+    <h1>나에게 어울리는 헤어는<br /><em>따로 있습니다</em></h1>
+    <p class="sub">25년 현장 전문 미용교수가 알려주는 '헤어 무드'의 비밀</p>
+    <div class="author-chip">
+      <div class="dot">민</div>
+      <span>25년차 현장 전문 미용교수 · <strong>민경이즘</strong></span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: 오프닝 훅 (비포/애프터) -->
+  <section>
+    <div class="container">
+      <div class="sec-label">Opening</div>
+      <h2 class="sec-title">같은 미용실, 같은 머리인데 왜 다르게 보일까요?</h2>
+      <p class="sec-desc">기술 때문일까요? 아닙니다. <strong>'무드'가 맞았기 때문</strong>입니다.</p>
+
+      <div class="compare-wrap">
+        <div class="photo-slot"><div class="num">1</div>사진 자리<br />(비포 스타일)</div>
+        <div class="photo-slot"><div class="num">2</div>사진 자리<br />(애프터 스타일)</div>
+      </div>
+      <p class="vote-hint">💬 "어느 쪽이 더 잘 어울리나요?" — 채팅으로 투표 받기</p>
+
+      <div class="card" style="margin-top:20px;">
+        <p style="font-size:14px; font-weight:700; color:var(--purple);">사실 헤어는 3가지 무드밖에 없습니다.</p>
+        <p style="font-size:13px; color:var(--text-sub); margin-top:6px;">오늘 그 3가지가 뭔지, 그리고 내가 어디에 가까운지 함께 찾아봅니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 2: 이미지 체인 + 민경이즘 공식 -->
+  <section>
+    <div class="container">
+      <div class="sec-label">Image Chain</div>
+      <h2 class="sec-title">같은 단발인데 왜 5살 어려 보이고, 왜 10살 나이 들어 보일까요?</h2>
+      <p class="sec-desc">얼굴형 하나만 맞춘다고 완성되지 않습니다. 이 순서를 함께 봐야 합니다.</p>
+
+      <div class="chain-row">
+        <span class="chain-node">얼굴형</span><span class="chain-arrow">→</span>
+        <span class="chain-node">목 길이</span><span class="chain-arrow">→</span>
+        <span class="chain-node">어깨</span><span class="chain-arrow">→</span>
+        <span class="chain-node">헤어라인</span><span class="chain-arrow">→</span>
+        <span class="chain-node">볼륨</span><span class="chain-arrow">→</span>
+        <span class="chain-node" style="background:var(--purple); color:#fff;">무드</span>
+      </div>
+
+      <div class="formula-mark" style="margin-top:28px;">
+        <div class="eq1">이미지 = 라인 <span>×</span> 볼륨 <span>×</span> 질감 <span>×</span> 컬러 <span>=</span> 무드</div>
+        <div class="eq2">그리고 <b>무드는 그 사람의 직업·나이·성격·라이프스타일</b>과 맞아야<br />진짜 어울리는 이미지가 완성됩니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 3: 3가지 무드 (쉬운 말 먼저) -->
+  <section>
+    <div class="container">
+      <div class="sec-label">3 Moods</div>
+      <h2 class="sec-title">헤어 무드, 크게 3가지입니다</h2>
+      <p class="sec-desc">지금 어떤 말에 가장 마음이 끌리시나요?</p>
+
+      <div class="easy-grid">
+        <div class="easy-card fem"><div class="emoji">🌸</div><h4>사랑스러운 이미지</h4><div class="term">전문용어: 페미닌</div></div>
+        <div class="easy-card mod"><div class="emoji">⚡</div><h4>세련된 이미지</h4><div class="term">전문용어: 모던</div></div>
+        <div class="easy-card nat"><div class="emoji">🍃</div><h4>편안한 이미지</h4><div class="term">전문용어: 내추럴</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 4: 사진 맞히기 게임 -->
+  <section>
+    <div class="container">
+      <div class="sec-label">🎮 Guess The Mood</div>
+      <h2 class="sec-title">사진 맞히기 게임</h2>
+      <p class="sec-desc">인물 사진을 보고 "페미닌 / 모던 / 내추럴" 중 채팅으로 맞혀보세요. 카드를 클릭하면 정답이 열립니다. (실제 진행 시 대표님이 준비하신 실물 사진 10장으로 교체)</p>
+
+      <div class="game-grid" id="gameGrid">
+        <!-- 10 placeholder cards, click to reveal -->
+        <div class="game-card" data-mood="fem"><div class="thumb">1</div><div class="label">사진 1</div><span class="answer fem">페미닌</span></div>
+        <div class="game-card" data-mood="mod"><div class="thumb">2</div><div class="label">사진 2</div><span class="answer mod">모던</span></div>
+        <div class="game-card" data-mood="nat"><div class="thumb">3</div><div class="label">사진 3</div><span class="answer nat">내추럴</span></div>
+        <div class="game-card" data-mood="fem"><div class="thumb">4</div><div class="label">사진 4</div><span class="answer fem">페미닌</span></div>
+        <div class="game-card" data-mood="mod"><div class="thumb">5</div><div class="label">사진 5</div><span class="answer mod">모던</span></div>
+        <div class="game-card" data-mood="nat"><div class="thumb">6</div><div class="label">사진 6</div><span class="answer nat">내추럴</span></div>
+        <div class="game-card" data-mood="fem"><div class="thumb">7</div><div class="label">사진 7</div><span class="answer fem">페미닌</span></div>
+        <div class="game-card" data-mood="mod"><div class="thumb">8</div><div class="label">사진 8</div><span class="answer mod">모던</span></div>
+        <div class="game-card" data-mood="nat"><div class="thumb">9</div><div class="label">사진 9</div><span class="answer nat">내추럴</span></div>
+        <div class="game-card" data-mood="mix"><div class="thumb">10</div><div class="label">사진 10 (헷갈림 주의)</div><span class="answer mod">스펙트럼!</span></div>
+      </div>
+      <p class="game-hint">👆 카드를 클릭하면 정답이 열립니다. (라이브 진행용 미리보기)</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 5: 계열별 디자인 공식 -->
+  <section>
+    <div class="container">
+      <div class="sec-label">Design Formula</div>
+      <h2 class="sec-title">계열별 실전 디자인 공식</h2>
+      <p class="sec-desc">방금 게임에서 맞힌 사진들, 다 이 공식 때문이었습니다.</p>
+
+      <div class="formula-box fem">
+        <div class="f-label">Feminine Formula</div>
+        <ol>
+          <li>웨이브 시작 위치를 눈 아래~볼 아래 라인에 둔다</li>
+          <li>볼륨 중심을 얼굴 옆·입가 주변에 부드럽게 만든다</li>
+          <li>얼굴을 감싸는 C/S 곡선 라인을 설계한다</li>
+          <li>질감은 부드러운 광택 + 자연스러운 흐름으로</li>
+        </ol>
+        <div class="salon-line">💬 "눈 아래쪽부터 웨이브 넣어주시고, 볼 옆에 볼륨 살려주세요"</div>
+      </div>
+
+      <div class="formula-box mod">
+        <div class="f-label">Modern Formula</div>
+        <ol>
+          <li>라인에서 직선 비율을 한 단계 올린다</li>
+          <li>볼륨 중심을 실루엣 전체 균형 쪽에 둔다</li>
+          <li>앞·옆·뒤 실루엣이 한 번에 그려지게 정리한다</li>
+          <li>질감은 깔끔한 광택 + 정리된 텍스처로</li>
+        </ol>
+        <div class="salon-line">💬 "끝선을 직선으로 정리해 주세요"</div>
+      </div>
+
+      <div class="formula-box nat">
+        <div class="f-label">Natural Formula</div>
+        <ol>
+          <li>질감은 너무 딱딱하지 않게 자연스럽게</li>
+          <li>얼굴선을 따라 흐르는 앞머리·옆머리 정리</li>
+          <li>너무 꽉 묶기보다 여유 있는 실루엣</li>
+          <li>원하는 느낌에 따라 움직임 강도 조절</li>
+        </ol>
+        <div class="salon-line">💬 "너무 정리된 느낌 말고 자연스럽게 흐르는 느낌으로요"</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 5.5: 헤어 → 메이크업 → 패션 확장 (예고, 개념 수준) -->
+  <section>
+    <div class="container">
+      <div class="sec-label">Head To Toe</div>
+      <h2 class="sec-title">이 무드, 헤어에서 끝나지 않습니다</h2>
+      <p class="sec-desc">오늘은 헤어를 중심으로 깊게 다뤘지만, 같은 라인·볼륨·질감·컬러 원리는 메이크업·패션에도 그대로 이어집니다.</p>
+
+      <div class="card">
+        <p style="font-size:14px; font-weight:700; color:var(--purple); margin-bottom:8px;">오늘 찾은 무드, 머리부터 발끝까지</p>
+        <p style="font-size:13.5px; color:var(--text-sub);">오늘은 헤어에 집중했지만, 페미닌·모던·내추럴이라는 같은 언어는 메이크업과 옷차림에도 그대로 적용됩니다. 이 부분은 다음 특강 또는 1:1 컨설팅에서 더 구체적으로 다뤄드릴 예정이에요.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 6: 실패 사례 -->
+  <section>
+    <div class="container">
+      <div class="sec-label">Case Study</div>
+      <h2 class="sec-title">단발 실패하는 진짜 이유</h2>
+      <div class="fail-block">
+        <p style="font-size:14px; color:var(--text-sub); margin-bottom:12px;">단발했는데 얼굴이 더 커 보인 적 있으세요? 얼굴형 문제일 수도 있지만, <strong>무드가 안 맞아서</strong> 생기는 경우도 정말 많습니다.</p>
+        <div class="summary-quote">단발은 길이가 문제가 아니라, 끝 라인의 위치 + 원하는 무드, 이 둘이 같이 맞아야 합니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 7: CLOSING + CTA -->
+  <section>
+    <div class="container">
+      <div class="sec-label">Closing</div>
+      <h2 class="sec-title">마무리하며 — 민경이즘 공식, 다시 한번</h2>
+
+      <div class="formula-mark" style="margin-bottom:20px;">
+        <div class="eq1">이미지 = 라인 <span>×</span> 볼륨 <span>×</span> 질감 <span>×</span> 컬러 <span>=</span> 무드</div>
+        <div class="eq2">무드는 <b>직업·나이·성격·라이프스타일</b>과 맞아야 완성됩니다.<br />그리고 이 무드는 <b>헤어·메이크업·패션</b>까지 머리부터 발끝까지 이어집니다.</div>
+      </div>
+
+      <div class="closing">
+        <p>
+          헤어스타일은 얼굴형만 맞춘다고 완성되지 않습니다.<br />
+          얼굴형 → 목 → 어깨 → 헤어라인 → 볼륨까지 이어지는 체인이<br />
+          <strong>내가 원하는 무드</strong>와 만날 때, 그리고 그 무드가 메이크업·패션까지 이어질 때<br />
+          비로소 완성됩니다.
+        </p>
+      </div>
+
+      <p style="font-size:14px; font-weight:700; margin-bottom:16px; color:var(--text);">더 자세한 상담이 필요하시다면</p>
+      <div class="cta-links">
+        <a href="https://open.kakao.com/o/si1Fo8ai" target="_blank" rel="noopener" class="cta-btn">
+          <div class="icon-box">💬</div>
+          <div style="font-size:13px; color:var(--text-sub); font-weight:400;">1:1 전신 이미지·헤어 컨설팅</div>
+        </a>
+        <a href="https://open.kakao.com/o/svHTxrbi" target="_blank" rel="noopener" class="cta-btn">
+          <div class="icon-box">✂️</div>
+          <div style="font-size:13px; color:var(--text-sub); font-weight:400;">민뷰티헤어 대치 샵 예약</div>
+        </a>
+        <a href="https://product.kyobobook.co.kr/detail/S000061897298" target="_blank" rel="noopener" class="cta-btn">
+          <div class="icon-box">📕</div>
+          <div style="font-size:13px; color:var(--text-sub); font-weight:400;">책 소개 · 행복한성공수업</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 <strong>민경이즘</strong> · 무단 전재 및 재배포 금지</p>
+    <p style="margin-top:6px;">이 문서의 저작권은 '민경이즘'에 있습니다.</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.game-card').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('revealed'));
+    });
+  </script>
+
+</body>
+</html>
